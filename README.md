@@ -59,6 +59,11 @@ Your assignment page on Canvas should contain instructions for submitting this p
   - respond with HTTP status code `500` (Server Error).
   - return the following JSON: `{ message: "There was an error while saving the post to the database" }`.
 
+
+
+
+
+
 #### 4 [PUT] /api/posts/:id
 
 - If the _post_ with the specified `id` is not found:
@@ -81,6 +86,18 @@ Your assignment page on Canvas should contain instructions for submitting this p
   - update the post document in the database using the new information sent in the `request body`.
   - return HTTP status code `200` (OK).
   - return the newly updated _post_.
+
+
+
+
+
+
+
+
+
+
+
+  
 
 #### 5 [DELETE] /api/posts/:id
 
