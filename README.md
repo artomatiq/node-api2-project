@@ -97,7 +97,7 @@ Your assignment page on Canvas should contain instructions for submitting this p
 
 
 
-  
+
 
 #### 5 [DELETE] /api/posts/:id
 
@@ -110,6 +110,23 @@ Your assignment page on Canvas should contain instructions for submitting this p
 
   - respond with HTTP status code `500`.
   - return the following JSON: `{ message: "The post could not be removed" }`.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 #### 6 [GET] /api/posts/:id/comments
 

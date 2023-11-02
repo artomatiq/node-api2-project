@@ -52,13 +52,13 @@ router.put('/:id', (req, res) => {
     const {title, contents} = req.body
 
     if (!title || !contents) {
-        res.status(400).json({message: 'Please provide title and contents for the post'})
+        return res.status(400).json({message: 'Please provide title and contents for the post'})
     }
 
     Posts.findById(id)
         .then (post => {
             if (!post) {
-                res.status(404).json({message: "The post with the specified ID does not exist"})
+                return res.status(404).json({message: "The post with the specified ID does not exist"})
             }
             else {
                 return Posts.update(id, {title, contents})
@@ -72,6 +72,50 @@ router.put('/:id', (req, res) => {
         })
         .catch (()=>{
             res.status(500).json({message: 'The post information could not be modified'})
+        })
+})
+
+router.delete('/:id', (req, res) => {
+    const {id} = req.params
+    let deletedPost = {}
+
+    Posts.findById(id)
+        .then (post=>{
+            console.log(post)
+            if (!post) {
+                res.status(404).json({message: 'The post with the specified ID does not exist'});
+            }
+            else {
+                deletedPost = post
+                return Posts.remove(id)
+            }
+        })
+        .then (()=>{
+            res.status(200).json(deletedPost)
+        })
+        .catch(()=>{
+            // res.status(500).json({message: 'The post could not be removed'});
+        })
+})
+
+router.get('/:id/comments', (req, res) => {
+    const {id} = req.params
+
+    Posts.findById(id)
+        .then (post => {
+            console.log(post)
+            if(!post) {
+                res.status(404).json({message: 'The post with the specified ID does not exist'});
+            }
+            else {
+                return Posts.findPostComments(id)
+            }
+        })
+        .then (comments=> {
+            res.status(200).json(comments)
+        })
+        .catch(()=>{
+            res.status(500).json({message: 'The comments information could not be retrieved'});
         })
 })
 
